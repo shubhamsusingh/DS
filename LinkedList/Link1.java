@@ -22,6 +22,22 @@ public class Link1 {
         head = newNode;
     }
 
+    public void addMiddle(int data, int idx) {
+        Node newNode = new Node(data);
+        int i = 1;
+        Node temp = head;
+        if (idx == 0) {
+            addFirst(data);
+            return;
+        }
+        while (i < idx - 1) {
+            temp = temp.next;
+            i++;
+        }
+        newNode.next = temp.next;
+        temp.next = newNode;
+    }
+
     public void AddLast(int data) {
         Node newNode = new Node(data);
         if (head == null) {
@@ -48,6 +64,7 @@ public class Link1 {
         l.addFirst(1);
         l.AddLast(4);
         l.AddLast(6);
+        l.addMiddle(5, 5);
         l.print();
 
     }
