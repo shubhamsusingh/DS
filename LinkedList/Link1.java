@@ -47,7 +47,7 @@ public class Link1 {
         l.addFirst(2);
         l.addFirst(1);
         l.AddLast(4);
-        l.AddLast(5);
+        l.AddLast(6);
         l.print();
 
     }
