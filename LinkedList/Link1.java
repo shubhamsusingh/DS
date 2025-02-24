@@ -11,7 +11,7 @@ public class Link1 {
 
     public static Node head;
     public static Node tail;
-    int size = 0;
+    public static int size = 0;
 
     public void addFirst(int data) {
         Node newNode = new Node(data);
@@ -25,14 +25,15 @@ public class Link1 {
     }
 
     public void addMiddle(int data, int idx) {
-        Node newNode = new Node(data);
-        size++;
-        int i = 1;
-        Node temp = head;
         if (idx == 0) {
             addFirst(data);
             return;
         }
+        Node newNode = new Node(data);
+        size++;
+        int i = 1;
+        Node temp = head;
+
         while (i < idx - 1) {
             temp = temp.next;
             i++;
@@ -61,58 +62,71 @@ public class Link1 {
         }
     }
 
-    public boolean removeFirst() {
+    public int removeFirst() {
         // Node temp=head;
-        if (head == null) {
-            return false;
+        if (size == 0) {
+            System.out.println("Linked List Is Empty");
+            return Integer.MIN_VALUE;
         }
+        size--;
+        int val = head.data;
         head = head.next;
-        return true;
+        return val;
 
     }
 
-    public boolean removeLast() {
-        if (head == null) {
-            return false;
-        }
-        Node temp = head;
-        if (head == tail) {
+    public int removeLast() {
+        if (size == 0) {
+            return Integer.MIN_VALUE;
+        } else if (size == 1) {
+            size--;
+            int val = head.data;
             head = tail = null;
+            return val;
         } else {
+            Node temp = head;
+
             while (temp.next != tail) {
                 temp = temp.next;
             }
+            int val = temp.next.data;
             temp.next = null;
             tail = temp;
+
+            size--;
+            return val;
         }
-        size--;
-        return true;
     }
 
-    public boolean removeIndex(int idx) {
+    public int removeIndex(int idx) {
         Node temp = head;
-        int i = -1;
-        if (head == null) {
-            return false;
-        }
-        if (head == tail) {
+        int i = 0;
+        int val;
+        if (size == 0) {
+            System.out.println("Linked List is empty");
+            return Integer.MAX_VALUE;
+        } else if (size == 1 && idx == 1) {
+            val = head.data;
             head = tail = null;
-        } else {
+            return val;
+        } else if (size >= idx) {
             while (temp != null && i < idx - 1) {
                 temp = temp.next;
                 i++;
             }
-            if (temp == null || temp.next == null) {
-                return false;
-            }
+            size--;
+            val = temp.next.data;
             temp.next = temp.next.next;
             if (temp.next == null) {
                 tail = temp;
             }
 
+        } else {
+            System.out.println("You have not enough data");
+            return Integer.MAX_VALUE;
         }
-        size--;
-        return true;
+
+        return val;
 
     }
 
@@ -125,30 +139,22 @@ public class Link1 {
         l.AddLast(6);
         l.addMiddle(5, 5);
         l.print();
-        boolean flag = l.removeFirst();
-        if (flag) {
-            System.out.println("Element Deleted Successfully");
-        } else {
+        int flag = l.removeFirst();
 
-            System.out.println("Element cant Deleted (NOt avaiblable)");
-        }
-        l.print();
-        boolean flag1 = l.removeLast();
-        if (flag1) {
-            System.out.println("Element Deleted Successfully");
-        } else {
+        System.out.println("Element Deleted Successfully " + flag);
 
-            System.out.println("Element cant Deleted (NOt avaiblable)");
-        }
         l.print();
-        boolean flag2 = l.removeIndex(2);
-        if (flag2) {
-            System.out.println("Element Deleted Successfully");
-        } else {
+        int flag1 = l.removeLast();
 
-            System.out.println("Element cant Deleted (NOt avaiblable)");
-        }
+        System.out.println("Element Deleted Successfully " + flag1);
+
         l.print();
+        int flag2 = l.removeIndex(3);
+
+        System.out.println("Element Deleted Successfully" + flag2);
+
+        l.print();
+        System.out.println("this is size " + size);
 
     }
 }
