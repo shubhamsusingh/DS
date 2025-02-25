@@ -48,6 +48,22 @@ public class Search {
         }
         return Integer.MIN_VALUE;
     }
+    public int helper(Node head,int key){
+        if(head==null){
+            return -1;
+        } 
+        if(head.data==key){
+            return 0;
+        }
+        int idx=helper(head.next,key);
+        if(idx==-1){
+            return -1;
+        }
+        return idx+1;
+    }
+    public int findrecursive(int key){
+        return helper(head,key);
+    }
 
     public static void main(String[] args) {
         Search s = new Search();
@@ -63,6 +79,8 @@ public class Search {
         } else {
             System.out.println("Data is not Present");
         }
+        int idx=s.findrecursive(3);
+        System.out.println(idx);
 
     }
 }
