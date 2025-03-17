@@ -47,23 +47,31 @@ public class Index {
         }
         Node newNode = new Node(data);
         size++;
+        if (idx == 1) {
+            addFirst(data);
+            return;
+        }
+
         Node temp = head;
         int i = 1;
         while (temp != null && i < idx - 1) {
             temp = temp.next;
             i++;
         }
+        if (temp == null || temp.next == null) {
+            System.out.println("Index is out of bounds.");
+            return;
+        }
         newNode.next = temp.next;
         newNode.prev = temp;
+        if (temp.next != null) {
+            temp.next.prev = newNode;
+        }
         temp.next = newNode;
-
-        // newNode.next = temp.next;
-
-        return;
-
     }
 
     public void addLast(int data) {
+
         Node newNode = new Node(data);
         size++;
         if (head == null) {
@@ -74,6 +82,14 @@ public class Index {
         tail.next = newNode;
         tail = newNode;
         return;
+    }
+
+    public void printFromlast() {
+        Node temp = tail;
+        while (temp != null) {
+            System.out.println(temp.data);
+            temp = temp.prev;
+        }
     }
 
     public static void main(String[] args) {
@@ -89,5 +105,6 @@ public class Index {
         i.print();
         i.addMid(2, 8);
         i.print();
+        i.printFromlast();
     }
 }
