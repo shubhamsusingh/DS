@@ -45,29 +45,59 @@ public class Index {
             addFirst(data);
             return;
         }
-        Node newNode = new Node(data);
-        size++;
         if (idx == 1) {
             addFirst(data);
             return;
         }
-
         Node temp = head;
         int i = 1;
-        while (temp != null && i < idx - 1) {
+        while (temp != null && i < idx) {
             temp = temp.next;
             i++;
         }
-        if (temp == null || temp.next == null) {
-            System.out.println("Index is out of bounds.");
+        Node newNode = new Node(data);
+        size++;
+        if (temp == null && temp.next == null) {
+            System.out.println("INDEX out of bound");
             return;
         }
         newNode.next = temp.next;
         newNode.prev = temp;
+
         if (temp.next != null) {
             temp.next.prev = newNode;
         }
         temp.next = newNode;
+        return;
+
+    }
+
+    public int removeFirst() {
+        if (head == null) {
+            System.out.println("There is no Node to remove");
+            return -1;
+        }
+        int removedData = head.data;
+        head = head.next;
+        size--;
+        return removedData;
+    }
+
+    public int removeLast() {
+        if (head == null) {
+            System.out.println("There is no Node to remove");
+            return -1;
+        }
+        int removedData = tail.data;
+        if (head == tail) {
+            head = tail = null;
+        } else {
+            tail = tail.prev;
+            tail.next = null;
+        }
+        size--;
+        return removedData;
+
     }
 
     public void addLast(int data) {
@@ -106,5 +136,15 @@ public class Index {
         i.addMid(2, 8);
         i.print();
         i.printFromlast();
+        int removedData = i.removeFirst();
+        System.out.println("Removed data : " + removedData);
+        i.print();
+        removedData = i.removeFirst();
+        System.out.println("Removed data : " + removedData);
+        i.print();
+        removedData = i.removeLast();
+        System.out.println("Removed data : " + removedData);
+        i.print();
+
     }
 }
