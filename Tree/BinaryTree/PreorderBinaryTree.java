@@ -35,13 +35,30 @@ public class PreorderBinaryTree {
             preorder(root.left);
             preorder(root.right);
         }
+
+        public static void inOrder(Node root){
+            if (root==null) {
+                System.out.print(-1+",");
+                return;
+            }
+            inOrder(root.left);
+            System.out.print(root.data+",");
+            inOrder(root.right);
+        }
     }
 
     public static void main(String[] args) {
         int data[] = { 1, 2, 4, -1, -1, 5, -1, -1, 3, -1, 6, -1, -1 };
+        for(int num:data){
+            System.out.print(num+",");
+        }
         Preorder p = new Preorder();
         Node root = p.buildTree(data);
         // System.out.println(root.data);
+        
+        System.out.println();
         p.preorder(root);
+        System.out.println();
+        p.inOrder(root);
     }
 }
