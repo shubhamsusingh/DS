@@ -1,4 +1,4 @@
-
+import java.util.*;
 public class PreorderBinaryTree {
     static class Node {
         int data;
@@ -12,7 +12,7 @@ public class PreorderBinaryTree {
         }
     }
 
-    static class Preorder {
+        static class Preorder {
         static int idx = -1;
 
         public static Node buildTree(int nodes[]) {
@@ -38,12 +38,43 @@ public class PreorderBinaryTree {
 
         public static void inOrder(Node root){
             if (root==null) {
-                System.out.print(-1+",");
                 return;
             }
             inOrder(root.left);
             System.out.print(root.data+",");
             inOrder(root.right);
+        }
+        public static void postOrder(Node root){
+            if (root==null) {
+                return;
+            }
+            postOrder(root.left);
+            postOrder(root.right);
+            System.out.print(root.data+",");
+        }
+        public static void levelorder(Node root){
+            Queue<Node> q=new LinkedList<>();
+            q.add(root);
+            q.add(null);
+            while (!q.isEmpty()) {
+                Node currentNode=q.remove();
+                if (currentNode==null) {
+                    System.out.println();
+                    if (q.isEmpty()) {
+                        break;
+                    }else{
+                        q.add(null);
+                    }
+                }else{
+                    System.out.print(currentNode.data+",");
+                    if (currentNode.left!=null) {
+                        q.add(currentNode.left);
+                    }
+                    if (currentNode.right!=null) {
+                        q.add(currentNode.right);
+                    }
+                }
+            }
         }
     }
 
@@ -60,5 +91,9 @@ public class PreorderBinaryTree {
         p.preorder(root);
         System.out.println();
         p.inOrder(root);
+        System.out.println();
+        p.postOrder(root);
+        System.out.println("\nleveloreder ");
+        p.levelorder(root);
     }
 }
