@@ -89,6 +89,16 @@ public class PreorderBinaryTree {
             return Math.max(left, right) + 1;
 
         }
+        public static int countNode(Node root){
+            if (root==null) {
+                return 0;
+            }
+            int sum=0;
+            int left=countNode(root.left);
+            int right=countNode(root.right);
+            sum=left+right+1;
+            return sum;
+        }
     }
 
     public static void main(String[] args) {
@@ -111,5 +121,7 @@ public class PreorderBinaryTree {
         System.out.println();
         int height = p.height(root);
         System.out.println("height of tree is : " + height);
+        int sum=p.countNode(root);
+        System.out.println("Number of Node in this tree is : "+sum);
     }
 }
