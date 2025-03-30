@@ -110,6 +110,7 @@ public class PreorderBinaryTree {
             return leftSum + rightSum + root.data;
         }
 
+        // first approch to find dimension of tree
         public static int dimension(Node root) {
             if (root == null) {
                 return 0;
@@ -121,6 +122,28 @@ public class PreorderBinaryTree {
             int selfDim = leftHeight + rightHeight + 1;
             int dimOfTree = Math.max(selfDim, Math.max(rightDim, leftDim));
             return dimOfTree;
+        }
+
+        // second approch to find the dimension of tree
+        static class Info {
+            int dim;
+            int height;
+
+            public Info(int dim, int h) {
+                this.dim = dim;
+                this.height = h;
+            }
+        }
+
+        public static Info dimeter1(Node root) {
+            if (root == null) {
+                return new Info(0, 0);
+            }
+            Info leftInfo = dimeter1(root.left);
+            Info rigInfo = dimeter1(root.right);
+            int dim = Math.max(Math.max(leftInfo.dim, rigInfo.dim), leftInfo.height + rigInfo.height + 1);
+            int height = Math.max(leftInfo.height, rigInfo.height) + 1;
+            return new Info(dim, height);
         }
     }
 
@@ -150,6 +173,7 @@ public class PreorderBinaryTree {
         System.out.println("sum of node is : " + sum);
         int dimension = p.dimension(root);
         System.out.println("Dimension of tree : " + dimension);
+        System.out.println(p.dimeter1(root).dim);
 
     }
 }
