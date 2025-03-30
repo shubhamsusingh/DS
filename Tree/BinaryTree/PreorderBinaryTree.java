@@ -89,24 +89,38 @@ public class PreorderBinaryTree {
             return Math.max(left, right) + 1;
 
         }
-        public static int countNode(Node root){
-            if (root==null) {
+
+        public static int countNode(Node root) {
+            if (root == null) {
                 return 0;
             }
-            int sum=0;
-            int left=countNode(root.left);
-            int right=countNode(root.right);
-            sum=left+right+1;
+            int sum = 0;
+            int left = countNode(root.left);
+            int right = countNode(root.right);
+            sum = left + right + 1;
             return sum;
         }
 
-        public static int sum(Node root){
-            if (root==null) {
+        public static int sum(Node root) {
+            if (root == null) {
                 return 0;
             }
-            int leftSum=sum(root.left);
-            int rightSum=sum(root.right);
-            return leftSum+rightSum+root.data;
+            int leftSum = sum(root.left);
+            int rightSum = sum(root.right);
+            return leftSum + rightSum + root.data;
+        }
+
+        public static int dimension(Node root) {
+            if (root == null) {
+                return 0;
+            }
+            int leftDim = dimension(root.left);
+            int leftHeight = height(root.left);
+            int rightDim = dimension(root.right);
+            int rightHeight = height(root.right);
+            int selfDim = leftHeight + rightHeight + 1;
+            int dimOfTree = Math.max(selfDim, Math.max(rightDim, leftDim));
+            return dimOfTree;
         }
     }
 
@@ -130,10 +144,12 @@ public class PreorderBinaryTree {
         System.out.println();
         int height = p.height(root);
         System.out.println("height of tree is : " + height);
-        int sumNode=p.countNode(root);
-        System.out.println("Number of Node in this tree is : "+sumNode);
-        int sum=p.sum(root);
-        System.out.println("sum of node is : "+sum);
+        int sumNode = p.countNode(root);
+        System.out.println("Number of Node in this tree is : " + sumNode);
+        int sum = p.sum(root);
+        System.out.println("sum of node is : " + sum);
+        int dimension = p.dimension(root);
+        System.out.println("Dimension of tree : " + dimension);
 
     }
 }
