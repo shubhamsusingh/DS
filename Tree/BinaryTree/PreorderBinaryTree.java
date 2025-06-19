@@ -148,7 +148,7 @@ public class PreorderBinaryTree {
     }
 
     public static void main(String[] args) {
-        int data[] = { 1, 2, 4, -1, -1, 5, -1, -1, 3, -1, 6, -1, -1 };
+        int data[] = { 1, 2, 4, -1, -1, 5, -1, -1, 3, 6, -1, -1, 7 };
         for (int num : data) {
             System.out.print(num + ",");
         }
